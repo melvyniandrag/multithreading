@@ -42,7 +42,6 @@ public class SingleThreadSum {
 	public static void main(String[] args) {
 		List<Integer> numbers = readIntFile("AThousandNumbers.txt");
 		
-		System.out.println(numbers.size());
 		if(numbers.size() == 0) {
 			System.out.println("Nothing to be done! Exiting.");
 			return;
