@@ -1,4 +1,4 @@
-package cs365;
+package reduce.sum;
 
 import java.io.File;
 import java.io.FileNotFoundException;

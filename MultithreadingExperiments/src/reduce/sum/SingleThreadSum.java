@@ -1,4 +1,4 @@
-package cs365;
+package reduce.sum;
 
 import java.util.Scanner;
 import java.util.ArrayList;
