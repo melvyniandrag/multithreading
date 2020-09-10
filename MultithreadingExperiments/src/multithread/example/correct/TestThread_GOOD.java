@@ -1,3 +1,11 @@
+/*
+ * This code is taken from here:
+ * 
+ * https://www.tutorialspoint.com/java/java_thread_synchronization.htm
+ * 
+ * It's a nice example.
+ */
+
 package multithread.example.correct;
 
 class PrintDemo {
