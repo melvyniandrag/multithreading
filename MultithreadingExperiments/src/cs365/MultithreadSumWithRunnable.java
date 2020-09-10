@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MultithreadSumWithRunnable extends Thread{
+public class MultithreadSumWithRunnable implements Runnable{
 	private static int total = 0;
 
 	private static ArrayList<Integer> readIntFile(String filename){
@@ -31,35 +31,47 @@ public class MultithreadSumWithRunnable extends Thread{
 		total += partialSum;
 	}
 	
+	private List<Integer> numbers;
+	private int startIndex;
+	private int count;
+	
 	MultithreadSumWithRunnable(List<Integer> numbers, int startIndex, int count){
+		this.numbers = numbers;
+		this.startIndex = startIndex;
+		this.count = count;
+	}
+	
+	public void run() {
 		int partialSum = 0;
 		for(int i = startIndex; i < startIndex + count; ++i ) {
 			partialSum += numbers.get(i);
+			try {
+				Thread.sleep(10);
+			}
+			catch(Exception e) {
+				
+			}
 		}
 		updateTotal(partialSum);
 	}
 	
 	private static void computeSum(List<Integer> numbers) throws InterruptedException{
-		final int batchSize = numbers.size() / 4;
+		final int N_BATCHES = 4;
+		final int BATCH_SIZE = numbers.size() / N_BATCHES;
 
-
-		Thread t1 = new Thread(new MultithreadSumWithRunnable(numbers, batchSize*0, batchSize));
-		Thread t2 = new Thread(new MultithreadSumWithRunnable(numbers, batchSize*1, batchSize));
-		Thread t3 = new Thread(new MultithreadSumWithRunnable(numbers, batchSize*2, batchSize));
-		Thread t4 = new Thread(new MultithreadSumWithRunnable(numbers, batchSize*3, batchSize));
+		ArrayList<Thread> threads = new ArrayList<Thread>();
+		for(int i = 0; i < N_BATCHES; ++i) {
+			threads.add( new Thread(new MultithreadSumWithRunnable(numbers, BATCH_SIZE*i, BATCH_SIZE)));
+		}
 		
 		final long T0 = System.nanoTime();
+		for(Thread t : threads) {
+			t.start();
+		}
 
-		t1.start();
-		t2.start();
-		t3.start();
-		t4.start();
-		
-		t1.join();
-		t2.join();
-		t3.join();
-		t4.join();
-		
+		for(Thread t : threads) {
+			t.join();
+		}
 		final long TF = System.nanoTime();
 
 		System.out.println(String.format(
@@ -68,7 +80,7 @@ public class MultithreadSumWithRunnable extends Thread{
 	}
 	
 	public static void main(String[] args) {
-		List<Integer> numbers = readIntFile("AMillionNumbers.txt");
+		List<Integer> numbers = readIntFile("AThousandNumbers.txt");
 
 		System.out.println(numbers.size());
 		if(numbers.size() == 0) {

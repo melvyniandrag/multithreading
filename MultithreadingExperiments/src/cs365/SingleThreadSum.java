@@ -30,11 +30,17 @@ public class SingleThreadSum {
 	private static void computeSum(List<Integer> list) {
 		for(Integer i : list) {
 			total += i;
+			try {
+				Thread.sleep(10);
+			}
+			catch(Exception e) {
+				
+			}
 		}
 	}
 	
 	public static void main(String[] args) {
-		List<Integer> numbers = readIntFile("AMillionNumbers.txt");
+		List<Integer> numbers = readIntFile("AThousandNumbers.txt");
 		
 		System.out.println(numbers.size());
 		if(numbers.size() == 0) {
