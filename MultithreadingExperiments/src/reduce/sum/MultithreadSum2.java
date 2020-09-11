@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MultithreadSum extends Thread{
+public class MultithreadSum2 extends Thread{
 	private static int total = 0;
 
 	private static ArrayList<Integer> readIntFile(String filename){
@@ -35,7 +35,7 @@ public class MultithreadSum extends Thread{
 	private int startIndex;
 	private int count;
 	
-	MultithreadSum(List<Integer> numbers, int startIndex, int count){
+	MultithreadSum2(List<Integer> numbers, int startIndex, int count){
 		this.numbers = numbers;
 		this.startIndex = startIndex;
 		this.count = count;
@@ -45,6 +45,12 @@ public class MultithreadSum extends Thread{
 		int partialSum = 0;
 		for(int i = startIndex; i < startIndex + count; ++i ) {
 			partialSum += numbers.get(i);
+			try {
+				Thread.sleep(10);
+			}
+			catch(Exception e) {
+				
+			}
 		}
 		updateTotal(partialSum);
 	}
@@ -55,7 +61,7 @@ public class MultithreadSum extends Thread{
 
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		for(int i = 0; i < N_BATCHES; ++i) {
-			threads.add( new MultithreadSum(numbers, BATCH_SIZE*i, BATCH_SIZE) );
+			threads.add( new MultithreadSum2(numbers, BATCH_SIZE*i, BATCH_SIZE) );
 		}
 		
 		final long T0 = System.nanoTime();

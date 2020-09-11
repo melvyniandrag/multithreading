@@ -6,7 +6,7 @@ import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class SingleThreadSum {
+public class SingleThreadSum2 {
 	private static int total = 0;
 	
 	private static ArrayList<Integer> readIntFile(String filename){
@@ -30,6 +30,12 @@ public class SingleThreadSum {
 	private static void computeSum(List<Integer> list) {
 		for(Integer i : list) {
 			total += i;
+			try {
+				Thread.sleep(10);
+			}
+			catch(Exception e) {
+				
+			}
 		}
 	}
 	
