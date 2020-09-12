@@ -46,9 +46,10 @@ public class SingleThreadSum2 {
 			System.out.println("Nothing to be done! Exiting.");
 			return;
 		}
-		
+		//t_0
 		final long T0 = System.nanoTime();
-		computeSum(numbers);		
+		computeSum(numbers);
+		//t_f
 		final long TF = System.nanoTime();
 
 		

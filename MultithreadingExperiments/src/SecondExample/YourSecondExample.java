@@ -10,27 +10,15 @@
  * This is good: More workers means things get done faster.
  * Your computer is very powerful; use all that power.
  */
-package FirstExample;
+package SecondExample;
 
-public class YourFirstExample extends Thread{
-	private static int numThreads = 0;
-	
-	private int threadNum = 0;
-	
-	YourFirstExample(){
-		numThreads++;
-		threadNum = numThreads;	
-	}
-	
-	public void run() {
-		System.out.printf("Hello from thread %d\n", threadNum);
-	}
-	
+public class YourSecondExample{
+
 	public static void main(String[] args) {
-		Thread t0 = new YourFirstExample();
-		Thread t1 = new YourFirstExample();
-		Thread t2 = new YourFirstExample();
-		Thread t3 = new YourFirstExample();
+		Thread t0 = new MyThreadTypeA();
+		Thread t1 = new MyThreadTypeB();
+		Thread t2 = new MyThreadTypeB();
+		Thread t3 = new MyThreadTypeB();
 		
 		t0.start();
 		t1.start();
